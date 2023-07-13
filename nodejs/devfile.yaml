@@ -1,0 +1,43 @@
+schemaVersion: 2.2.0
+metadata:
+  attributes:
+    metadata-name-field: generateName
+attributes:
+  controller.devfile.io/devworkspace-config:
+    name: devworkspace-config
+    namespace: openshift-operators
+  controller.devfile.io/scc: container-build
+  controller.devfile.io/storage-type: per-workspace
+components:
+  - attributes:
+      controller.devfile.io/merge-contribution: true
+    container:
+      endpoints:
+        - exposure: public
+          name: app-url
+          protocol: https
+          targetPort: 3000
+      env:
+        - name: CHE_DASHBOARD_URL
+          value: https://devspaces.apps.cluster-cmj4l.cmj4l.sandbox633.opentlc.com
+        - name: CHE_PLUGIN_REGISTRY_URL
+          value: https://devspaces.apps.cluster-cmj4l.cmj4l.sandbox633.opentlc.com/plugin-registry/v3
+        - name: CHE_PLUGIN_REGISTRY_INTERNAL_URL
+          value: http://plugin-registry.openshift-operators.svc:8080/v3
+        - name: CLUSTER_CONSOLE_URL
+          value: https://console-openshift-console.apps.cluster-cmj4l.cmj4l.sandbox633.opentlc.com
+        - name: CLUSTER_CONSOLE_TITLE
+          value: OpenShift console
+        - name: OPENVSX_REGISTRY_URL
+          value: ''
+      image: registry.redhat.io/devspaces/udi-rhel8:3.6
+      memoryLimit: 1G
+      mountSources: true
+      sourceMapping: /projects
+      volumeMounts:
+        - name: npm
+          path: /home/user/.npm
+    name: tools
+  - name: npm
+    volume:
+      size: 1G
