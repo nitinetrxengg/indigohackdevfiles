@@ -8,8 +8,8 @@ components:
       image: registry.redhat.io/devspaces/udi-rhel8:3.6
       endpoints:
         - exposure: public
-          name: nodejs
-          protocol: http
+          name: app-url
+          protocol: https
           targetPort: 3000
       memoryLimit: 1G
       mountSources: true
