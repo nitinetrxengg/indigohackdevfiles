@@ -3,27 +3,27 @@ metadata:
   attributes:
     metadata-name-field: generateName
 components:
+  - name: tools
     container:
+      image: registry.redhat.io/devspaces/udi-rhel8:3.6
       endpoints:
-        - exposure: none
-          name: debug
-          protocol: tcp
-          targetPort: 5005
         - exposure: public
           name: app-url
           protocol: https
           targetPort: 8080
+        - exposure: none
+          name: debug
+          protocol: tcp
+          targetPort: 5005
       env:
         - name: QUARKUS_HTTP_HOST
           value: 0.0.0.0
-      image: registry.redhat.io/devspaces/udi-rhel8:3.6
       memoryLimit: 4G
       mountSources: true
       sourceMapping: /projects
       volumeMounts:
         - name: m2
           path: /home/user/.m2
-    name: tools
   - name: m2
     volume:
       size: 1G
