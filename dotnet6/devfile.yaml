@@ -1,1 +1,31 @@
-
+schemaVersion: 2.2.0
+metadata:
+  attributes:
+    metadata-name-field: generateName
+components:
+  - name: tools
+    container:
+      image: quay.io/balki404/dotnet-udi9:6.0
+      endpoints:
+        - exposure: public
+          name: app-url
+          protocol: https
+          targetPort: 8080
+      env:
+        - name: STARTUP_PROJECT
+          value: app.csproj
+        - name: ASPNETCORE_ENVIRONMENT
+          value: Development
+        - name: ASPNETCORE_URLS
+          value: https://*:8080
+         - name: CONFIGURATION
+          value: Debug
+      memoryLimit: 2Gi
+      mountSources: true
+      sourceMapping: /projects
+      volumeMounts:
+        - name: nuget
+          path: /home/user/.nuget
+  - name: nuget
+    volume:
+      size: 1G
