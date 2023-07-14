@@ -1,16 +1,16 @@
-schemaVersion: 2.2.0
+schemaVersion: 2.1.0
 metadata:
   attributes:
     metadata-name-field: generateName
 components:
-  - name: tools
-    container:
-      image: quay.io/devfile/universal-developer-image:ubi8-latest
+  - container:
       endpoints:
         - exposure: public
           name: app-url
           protocol: https
           targetPort: 4200
+      image: quay.io/devfile/universal-developer-image:ubi8-latest
       memoryLimit: 2G
       mountSources: true
       sourceMapping: /projects
+    name: tools
