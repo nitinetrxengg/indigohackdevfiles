@@ -3,19 +3,22 @@ metadata:
   attributes:
     metadata-name-field: generateName
 components:
-  - name: tools
+  - attributes:
+      controller.devfile.io/merge-contribution: true
     container:
-      image: registry.redhat.io/devspaces/udi-rhel8:3.6
       endpoints:
         - exposure: public
           name: app-url
           protocol: https
           targetPort: 3000
+      image: registry.redhat.io/devspaces/udi-rhel8:3.6
       memoryLimit: 1G
       mountSources: true
+      sourceMapping: /projects
       volumeMounts:
         - name: npm
           path: /home/user/.npm
+    name: tools
   - name: npm
     volume:
       size: 1G
