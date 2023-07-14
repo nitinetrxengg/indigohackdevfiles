@@ -3,14 +3,15 @@ metadata:
   attributes:
     metadata-name-field: generateName
 components:
-  - name: tools
+  - attributes:
+      controller.devfile.io/merge-contribution: true
     container:
-      image: quay.io/devfile/universal-developer-image:ubi8-latest
       endpoints:
         - exposure: public
           name: app-url
           protocol: https
           targetPort: 4100
-      memoryLimit: 2G
-      mountSources: true
+      image: quay.io/devfile/universal-developer-image:ubi8-latest
+      memoryLimit: 1G
       sourceMapping: /projects
+    name: tools
