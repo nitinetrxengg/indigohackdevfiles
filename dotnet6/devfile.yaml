@@ -3,29 +3,35 @@ metadata:
   attributes:
     metadata-name-field: generateName
 components:
-  - name: tools
+  - attributes:
+      controller.devfile.io/merge-contribution: true
     container:
-      image: quay.io/balki404/dotnet-udi9:6.0
+      args:
+        - tail
+        - '-f'
+        - /dev/null
       endpoints:
         - exposure: public
           name: app-url
           protocol: https
           targetPort: 8080
       env:
+        - name: CONFIGURATION
+          value: Debug
         - name: STARTUP_PROJECT
           value: app.csproj
         - name: ASPNETCORE_ENVIRONMENT
           value: Development
         - name: ASPNETCORE_URLS
-          value: https://*:8080
-         - name: CONFIGURATION
-          value: Debug
+          value: http://*:8080
+      image: quay.io/balki404/dotnet-udi9:6.0
       memoryLimit: 2Gi
       mountSources: true
       sourceMapping: /projects
       volumeMounts:
         - name: nuget
           path: /home/user/.nuget
+    name: tools
   - name: nuget
     volume:
       size: 1G
