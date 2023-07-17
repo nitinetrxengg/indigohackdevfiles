@@ -3,24 +3,17 @@ metadata:
   attributes:
     metadata-name-field: generateName
 components:
-  - name: tools
+  - attributes:
+      controller.devfile.io/merge-contribution: true
     container:
       image: registry.redhat.io/devspaces/udi-rhel8:3.6
-      endpoints:
-        - exposure: public
-          name: app-url
-          protocol: https
-          targetPort: 8080
-        - exposure: none
-          name: debug
-          protocol: tcp
-          targetPort: 5005
       memoryLimit: 2G
       mountSources: true
       sourceMapping: /projects
       volumeMounts:
         - name: venv
           path: /home/user/.venv
+    name: python
   - name: venv
     volume:
       size: 1G
