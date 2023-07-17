@@ -10,7 +10,7 @@ components:
         - exposure: public
           name: app-url
           protocol: https
-          targetPort: 3000
+          targetPort: 8080
       image: registry.redhat.io/devspaces/udi-rhel8:3.6
       memoryLimit: 1G
       mountSources: true
