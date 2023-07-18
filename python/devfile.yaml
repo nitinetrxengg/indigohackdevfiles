@@ -6,8 +6,13 @@ components:
   - attributes:
       controller.devfile.io/merge-contribution: true
     container:
-      image: registry.redhat.io/devspaces/udi-rhel8:3.6
-      memoryLimit: 2G
+      endpoints:
+        - exposure: public
+          name: app-url
+          protocol: https
+          targetPort: 8080
+      image: quay.io/devfile/universal-developer-image:ubi8-latest
+      memoryLimit: 512Mi
       mountSources: true
       sourceMapping: /projects
       volumeMounts:
