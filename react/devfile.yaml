@@ -16,7 +16,7 @@ components:
       sourceMapping: /projects
       volumeMounts:
         - name: m2
-          path: /home/user/.m2
+          path: /home/user/.npm
     name: tools
   - name: m2
     volume:
