@@ -14,4 +14,10 @@ components:
       image: quay.io/devfile/universal-developer-image:ubi8-latest
       memoryLimit: 1G
       sourceMapping: /projects
+      volumeMounts:
+        - name: m2
+          path: /home/user/.m2
     name: tools
+  - name: m2
+    volume:
+      size: 1G
