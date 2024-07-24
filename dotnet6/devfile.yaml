@@ -24,7 +24,7 @@ components:
           value: Development
         - name: ASPNETCORE_URLS
           value: http://*:8080
-      image: quay.io/balki404/dotnet-udi9:6.0
+      image: quay.io/devfile/universal-developer-image:ubi8-latest
       memoryLimit: 2Gi
       mountSources: true
       sourceMapping: /projects
