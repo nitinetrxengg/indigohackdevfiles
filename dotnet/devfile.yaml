@@ -1,0 +1,27 @@
+schemaVersion: 2.2.0
+metadata:
+  attributes:
+    metadata-name-field: generateName
+components:
+  - attributes:
+      controller.devfile.io/merge-contribution: true
+    container:
+      args:
+        - tail
+        - '-f'
+        - /dev/null
+      endpoints:
+        - exposure: public
+          name: app-url
+          protocol: https
+          targetPort: 8080
+      image: quay.io/devfile/universal-developer-image:ubi8-latest
+      memoryLimit: 2Gi
+      mountSources: true
+      volumeMounts:
+        - name: nuget
+          path: /home/user/.nuget
+    name: tools
+  - name: nuget
+    volume:
+      size: 1G
